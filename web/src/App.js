@@ -11,24 +11,25 @@ import Photos from './Photos'
 const App = () => (
   <Router>
     <div>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
-            <Link to="/">Track</Link>
+            <Link to="/tracker">Track</Link>
           </li>
           <li>
-            <Link to="/photos">Photos</Link>
+            <Link to="/">Photos</Link>
           </li>
         </ul>
       </nav>
+      */}
 
       <Switch>
-        <Route path="/photos">
-          <Photos />
+        <Route exact path="/tracker">
+          <Tracker />
         </Route>
 
-        <Route path="/">
-          <Tracker />
+        <Route exact path="/">
+          <Photos />
         </Route>
       </Switch>
     </div>
