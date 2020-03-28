@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - 3333:3333
+    restart: always
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  tracker:
+    build:
+      context: ./web-tracker
+    ports:
+      - 3000:3000
+    restart: always
+    volumes:
+      - ./web-tracker:/app
+      - /app/node_modules
+
+  watcher:
+    build:
+      context: ./web-watcher
+    ports:
+      - 4000:4000
+    restart: always
+    volumes:
+      - ./web-watcher:/app
+      - /app/node_modules
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379

@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { upload } from './upload'
+import { uploadQueue } from './upload'
 import { renderPredictions, clear } from './prediction-renderer'
 import { DetectionModel, getModel } from './detection-model'
 import './Tracker.css'
 
 const detection = new DetectionModel()
+const queue = uploadQueue()
 
 const App = () => {
   const [trackEnabled, setTrack] = useState(true)
@@ -47,6 +48,8 @@ const App = () => {
   const initPredictions = model => {
     const video = videoRef.current
 
+    queue.run()
+
     detection.init({
       model,
       video,
@@ -57,7 +60,7 @@ const App = () => {
           canvas: canvasRef.current,
           onPrediction: predictionClass => {
             if (predictionClass === 'person') {
-              upload(canvasRef.current)
+              queue.enqueue(canvasRef.current)
             }
           }
         })
