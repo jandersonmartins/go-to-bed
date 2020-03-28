@@ -24,7 +24,9 @@ app.post('/upload-photo', (req, res) => {
 app.get('/photos', (req, res) => {
   readdir('./photos', (e, photos) => {
     redisClient.hgetall('photos', (err, photosEntry) => {
-      if (!photosEntry) res.end()
+      if (!photosEntry) {
+        return res.json({ photos: [] })
+      }
 
       const photos = Object
         .entries(photosEntry)

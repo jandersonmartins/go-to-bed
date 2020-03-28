@@ -16,6 +16,7 @@ services:
       context: ./web-tracker
     ports:
       - 3000:3000
+    stdin_open: true
     restart: always
     volumes:
       - ./web-tracker:/app
@@ -26,6 +27,7 @@ services:
       context: ./web-watcher
     ports:
       - 4000:4000
+    stdin_open: true
     restart: always
     volumes:
       - ./web-watcher:/app
