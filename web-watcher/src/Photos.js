@@ -21,11 +21,11 @@ const Photos = () => {
   return (
     <div>
       <button type="button" onClick={fetchPhotos}>Reload</button>
-      {photos.length && (
+      {!!photos.length && (
         <div>
           {photos.map(url =>
             <div key={url}>
-              <img className="photo" src={url} />
+              <img className="photo" src={url} alt="Tracked"/>
             </div>
           )}
         </div>
