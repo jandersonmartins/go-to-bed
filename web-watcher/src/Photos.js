@@ -5,7 +5,7 @@ const Photos = () => {
   const [photos, setPhotos] = useState([])
 
   const fetchPhotos = async () => {
-    const res = await fetch('http://192.168.25.110:3333/photos', {
+    const res = await fetch('http://localhost:3333/photos', {
       method: 'GET'
     })
 

@@ -1,5 +1,3 @@
-const { join } = require('path')
-const { readdir } = require('fs')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -21,19 +19,17 @@ app.post('/upload-photo', (req, res) => {
   res.end()
 })
 
-app.get('/photos', (req, res) => {
-  readdir('./photos', (e, photos) => {
-    redisClient.hgetall('photos', (err, photosEntry) => {
-      if (!photosEntry) {
-        return res.json({ photos: [] })
-      }
+app.get('/photos', (_, res) => {
+  redisClient.hgetall('photos', (err, photosEntry) => {
+    if (!photosEntry) {
+      return res.json({ photos: [] })
+    }
 
-      const photos = Object
-        .entries(photosEntry)
-        .map(([_, base64]) => base64)
+    const photos = Object
+      .entries(photosEntry)
+      .map(([_, base64]) => base64)
 
-      res.json({ photos })
-    })
+    res.json({ photos })
   })
 })
 

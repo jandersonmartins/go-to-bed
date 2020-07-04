@@ -59,9 +59,8 @@ const App = () => {
           video,
           canvas: canvasRef.current,
           onPrediction: predictionClass => {
-            if (predictionClass === 'person') {
-              queue.enqueue(canvasRef.current)
-            }
+            console.log('--->', predictionClass)
+            queue.enqueue(canvasRef.current)
           }
         })
       }
